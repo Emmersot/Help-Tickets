@@ -1,4 +1,3 @@
-import React from "react";
 import { auth } from "./../firebase.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import React, { useState } from "react";
@@ -50,11 +49,11 @@ function SignIn(){
       <form onSubmit={doSignUp}>
           <input
             type='text'
-            name='signinEmail'
+            name='email'
             placeholder='email' />
           <input
             type='password'
-            name='signinPassword'
+            name='password'
             placeholder='Password' />
           <button type='submit'>Sign up</button>
         </form>
@@ -77,7 +76,7 @@ function SignIn(){
       {signOutSuccess}
       <br />
       <button onClick={doSignOut}>Sign out</button>
-      </React.Fragment>
+    </React.Fragment>
   );
 }
 
