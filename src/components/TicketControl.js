@@ -3,9 +3,9 @@ import TicketList from './TicketList';
 import EditTicketForm from './EditTicketForm';
 import TicketDetail from './TicketDetail';
 import React, { useEffect, useState } from 'react';
-import { db } from './../firebase.js'
-import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc  } from "firebase/firestore";
-
+import { db , auth } from './../firebase.js'
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy  } from "firebase/firestore";
+import { formatDistanceToNow } from 'date-fns';
 
 function TicketControl() {
 
@@ -16,18 +16,42 @@ function TicketControl() {
   const [error, setError] = useState(null);
 
   useEffect(() => { 
-    const unSubscribe = onSnapshot(
+    const queryByTimestamp = query(
       collection(db, "tickets"), 
-      (collectionSnapshot) => {
+      orderBy('timeOpen')
+    );
+    
+    function updateTicketElapsedWaitTime() {
+      const newMainTicketList = mainTicketList.map(ticket => {
+        const newFormattedWaitTime = formatDistanceToNow(ticket.timeOpen);
+        return {...ticket, formattedWaitTime: newFormattedWaitTime};
+      });
+      setMainTicketList(newMainTicketList);
+    }
+
+    const waitTimeUpdateTimer = setInterval(() =>
+    updateTicketElapsedWaitTime(), 
+    60000
+  );
+
+    const unSubscribe = onSnapshot(
+      queryByTimestamp, 
+      (querySnapshot) => {
         const tickets = [];
-        collectionSnapshot.forEach((doc) => {
-            tickets.push({
-              ... doc.data(), // Spread operator in use!
-              id: doc.id
-            });
+        querySnapshot.forEach((doc) => {
+          const timeOpen = doc.get('timeOpen', {serverTimestamps: "estimate"}).toDate();
+          const jsDate = new Date(timeOpen);
+          tickets.push({
+            names: doc.data().names, 
+            location: doc.data().location, 
+            issue: doc.data().issue, 
+            timeOpen: jsDate,
+            formattedWaitTime: formatDistanceToNow(jsDate),
+            id: doc.id
+          });
         });
         setMainTicketList(tickets);
-      }, 
+      },
       (error) => {
         setError(error.message);
       }
@@ -74,8 +98,15 @@ function TicketControl() {
     setSelectedTicket(selection);
   }
 
-  let currentlyVisibleState = null;
-  let buttonText = null; 
+  if (auth.currentUser == null) {
+    return (
+      <React.Fragment>
+        <h1>You must be signed in to access the queue.</h1>
+      </React.Fragment>
+    )
+  } else if (auth.currentUser != null) {
+    let currentlyVisibleState = null;
+    let buttonText = null; 
 
   if (error) {
     currentlyVisibleState = <p>There was an error: {error}</p>
@@ -102,12 +133,14 @@ function TicketControl() {
         ticketList={mainTicketList} />;
     buttonText = "Add Ticket"; 
   }
+
   return (
     <React.Fragment>
       {currentlyVisibleState}
       {error ? null : <button onClick={handleClick}>{buttonText}</button>}
     </React.Fragment>
   );
+}
 }
 
 export default TicketControl;
