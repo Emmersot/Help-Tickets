@@ -1,10 +1,15 @@
-## Important Note to Epicodus Students
+# React Help Ticket Queue
 
-This project contains all the code from the LearnHowToProgram.com Section 2: React Fundamentals coursework in which we created a Help Queue project. 
+## Technologies Used
 
-It is meant to be used as a starter repo to continue the Help Queue project in Section 4: React with NoSQL, starting in the lesson "Refactoring Help Queue to Use Hooks":
+* _Node_
+* _React_
+* _JavaScript_
+* _JSX_
+* _Firebase_
 
-[https://www.learnhowtoprogram.com/react/react-with-nosql/refactoring-help-queue-to-use-hooks](https://www.learnhowtoprogram.com/react/react-with-nosql/refactoring-help-queue-to-use-hooks)
+![Diagram](https://github.com/Emmersot/Help-Tickets/blob/main/public/HelpQueueTicketList.png?raw=true)
+![Diagram](https://github.com/Emmersot/Help-Tickets/blob/main/public/HelpQueueAuthorization.png?raw=true)
 
 ---
 
@@ -46,33 +51,3 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
